@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import usePost from '../hooks/post.hook';
+import usePost from '../hooks/usePost.hook';
 
 const Post = () => {
     const page_size = 10;

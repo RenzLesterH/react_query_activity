@@ -1,19 +1,12 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useRef } from 'react';
-import { Todo } from '../hooks/todo.hooks';
-import axios from 'axios';
+import useAddTodo from '../hooks/useAddTodo.hook';
 
 const TodoForm = () => {
   const ref = useRef<HTMLInputElement>(null);
-  const queryClient = useQueryClient(); 
-  const addTodo = useMutation<Todo, Error, Todo>({
-    mutationFn: (todo: Todo) => 
-        axios
-            .post("https://jsonplaceholder.typicode.com/todoas", todo)
-            .then(res => res.data),
-    onSuccess: (saved_todo) => {
-        queryClient.setQueryData<Todo[]>(["todos"], todos => [saved_todo, ...(todos || [])] )
-    }
+  const addTodo = useAddTodo(() => {
+      if(ref.current){
+        ref.current.value = "";
+      }
   });
 
   return (
