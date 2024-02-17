@@ -40,7 +40,7 @@ const useAddTodo = (onAdd: () => void) => {
         onError: (error, new_todo, context) => {
             if (!context) return;
 
-            queryClient.setQueryData<Todo[]>(CACHE_KEY_TODOS, context.previous_todos)
+            queryClient.setQueryData<Todo[]>(CACHE_KEY_TODOS, context.previous_todos[0][1])
         }
     });
 }
